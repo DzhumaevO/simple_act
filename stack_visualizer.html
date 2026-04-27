@@ -20,6 +20,12 @@
             font-family: 'Inter', sans-serif;
             margin: 0;
             overflow-x: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        body.loaded {
+            opacity: 1;
         }
 
         .mono { font-family: 'JetBrains Mono', monospace; }
@@ -64,6 +70,13 @@
             display: inline-block;
             margin-right: 8px;
             box-shadow: 0 0 10px #00ff41;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 65, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0); }
         }
 
         .flow-line {
@@ -90,18 +103,18 @@
         <header class="mb-12">
             <span class="mono text-accent text-sm tracking-widest uppercase mb-2 block">// SYSTEM_ARCHITECTURE_V2.0</span>
             <h1 class="text-5xl font-black italic uppercase tracking-tighter">ИТ-СТЭК <span class="text-accent">ПРИБЫЛИ</span></h1>
-            <p class="mt-4 text-white/50 max-w-xl">Визуализация того, как технологии SIMPLE превращают 900 м² в высокоэффективный цифровой актив.</p>
+            <p class="mt-4 text-white/50 max-w-xl text-lg">Технологии SIMPLE: автоматизация процессов и контроль маржи на площади 900 м².</p>
         </header>
 
         <div class="space-y-4">
             
-            <!-- LAYER 1 -->
+            <!-- LAYER 1: ERP -->
             <div class="stack-layer">
                 <div class="flex justify-between items-start mb-4">
                     <div class="flex items-center">
                         <i class="fa-solid fa-server text-accent text-2xl mr-4"></i>
                         <div>
-                            <h3 class="font-bold text-xl uppercase italic">Ядро: iiko Cloud Enterprise</h3>
+                            <h3 class="font-bold text-xl uppercase italic">iiko Cloud Enterprise</h3>
                             <p class="text-sm text-white/40">Сквозной учет и ERP-система</p>
                         </div>
                     </div>
@@ -110,76 +123,76 @@
                 <div class="mono text-xs text-white/30 space-y-1">
                     <p>> Контроль ТТК в реальном времени</p>
                     <p>> Интеграция с ЕГАИС/Честный Знак</p>
-                    <p>> Автоматический заказ поставщикам</p>
+                    <p>> Автоматический заказ поставщикам на базе ИИ-прогнозов</p>
                 </div>
             </div>
 
             <div class="flow-line"></div>
 
-            <!-- LAYER 2 -->
+            <!-- LAYER 2: MARKETING -->
             <div class="stack-layer">
                 <div class="flex justify-between items-start mb-4">
                     <div class="flex items-center">
                         <i class="fa-solid fa-brain text-accent text-2xl mr-4"></i>
                         <div>
                             <h3 class="font-bold text-xl uppercase italic">Data-Driven Маркетинг</h3>
-                            <p class="text-sm text-white/40">AI-аналитика трафика и LTV</p>
+                            <p class="text-sm text-white/40">AI-аналитика трафика и CRM</p>
                         </div>
                     </div>
                     <span class="impact-badge">Retention +40%</span>
                 </div>
                 <div class="mono text-xs text-white/30 space-y-1">
                     <p>> Динамическое ценообразование (Happy Hours)</p>
-                    <p>> Сегментация базы: 25,000+ уникальных гостей</p>
-                    <p>> Авто-рассылки на базе триггеров поведения</p>
+                    <p>> Сегментация базы по RFM-анализу</p>
+                    <p>> Автоматические пуш-уведомления для возврата гостей</p>
                 </div>
             </div>
 
             <div class="flow-line"></div>
 
-            <!-- LAYER 3 -->
+            <!-- LAYER 3: SCM -->
             <div class="stack-layer">
                 <div class="flex justify-between items-start mb-4">
                     <div class="flex items-center">
                         <i class="fa-solid fa-boxes-stacked text-accent text-2xl mr-4"></i>
                         <div>
-                            <h3 class="font-bold text-xl uppercase italic">Управление СТМ</h3>
+                            <h3 class="font-bold text-xl uppercase italic">Экосистема СТМ</h3>
                             <p class="text-sm text-white/40">Собственная торговая марка</p>
                         </div>
                     </div>
                     <span class="impact-badge">Margin +15%</span>
                 </div>
                 <div class="mono text-xs text-white/30 space-y-1">
-                    <p>> Прямые контракты с заводами (Китай/РФ)</p>
-                    <p>> Устранение наценки дистрибьютора</p>
-                    <p>> Уникальный брендированный мерч и расходники</p>
+                    <p>> Прямые контракты с заводами-производителями</p>
+                    <p>> Минимизация посредников в цепочке поставок</p>
+                    <p>> Брендированный продукт высокого качества</p>
                 </div>
             </div>
 
             <div class="flow-line"></div>
 
-            <!-- LAYER 4 -->
+            <!-- LAYER 4: TOTAL -->
             <div class="stack-layer border-accent/30 bg-accent/5">
                 <div class="flex justify-between items-start mb-4">
                     <div class="flex items-center">
                         <i class="fa-solid fa-chart-line text-accent text-2xl mr-4"></i>
                         <div>
-                            <h3 class="font-bold text-xl uppercase italic">Экономика масштаба</h3>
-                            <p class="text-sm text-white/40">Результат синергии всех систем</p>
+                            <h3 class="font-bold text-xl uppercase italic">Результат системы</h3>
+                            <p class="text-sm text-white/40">Масштабируемая бизнес-модель</p>
                         </div>
                     </div>
                     <div class="flex items-center">
                         <span class="status-dot"></span>
-                        <span class="mono text-xs text-[#00ff41]">SCALING READY</span>
+                        <span class="mono text-xs text-[#00ff41]">READY TO SCALE</span>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4 mt-6">
-                    <div class="bg-black/40 p-4 rounded-lg">
+                    <div class="bg-black/40 p-4 rounded-lg text-center">
                         <p class="text-[10px] uppercase opacity-50 mb-1">ФОТ к выручке</p>
                         <p class="text-2xl font-black italic accent">12%</p>
                     </div>
-                    <div class="bg-black/40 p-4 rounded-lg">
-                        <p class="text-[10px] uppercase opacity-50 mb-1">Foodcost (Fix Price)</p>
+                    <div class="bg-black/40 p-4 rounded-lg text-center">
+                        <p class="text-[10px] uppercase opacity-50 mb-1">Фуд-кост</p>
                         <p class="text-2xl font-black italic accent">28%</p>
                     </div>
                 </div>
@@ -188,9 +201,28 @@
         </div>
 
         <footer class="mt-12 pt-8 border-t border-white/5 text-center">
-            <p class="mono text-[10px] opacity-30 uppercase tracking-[0.3em]">Built for Simple Mega Project by Orzu Dzhumaev</p>
+            <p class="mono text-[10px] opacity-30 uppercase tracking-[0.3em]">SIMPLE MEGA PROJECT // DIGITAL ARCHITECTURE</p>
         </footer>
     </div>
+
+    <script>
+        // Скрипт предотвращения бесконечной загрузки
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+            
+            if (window.parent !== window) {
+                try {
+                    const parentLoader = window.parent.document.getElementById('loader');
+                    if (parentLoader) {
+                        parentLoader.style.opacity = '0';
+                        setTimeout(() => parentLoader.style.display = 'none', 500);
+                    }
+                } catch (e) {
+                    console.warn("Parent loader access issues - likely cross-origin. Use standard layout.");
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
