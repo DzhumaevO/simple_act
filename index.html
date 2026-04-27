@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMPLE | Инвестиционный Портал</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Urbanist:ital,wght@0,400;0,700;1,900&family=JetBrains+Mono&display=swap');
+        
+        :root { 
+            --accent: #FFB07C; 
+            --green: #00ff41; 
+            --dark: #050505;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 80px;
+            background: #0a0a0a;
+            border-right: 1px solid rgba(255,255,255,0.05);
+            height: 100vh;
+            position: fixed;
+            left: 0; top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 0;
+            z-index: 100;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sidebar:hover {
+            width: 240px;
+            align-items: flex-start;
+            padding: 1.5rem;
+        }
+
+        .sidebar:hover .nav-text {
+            display: block;
+        }
+
+        .nav-text {
+            display: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+
+        .main-content {
+            margin-left: 80px;
+            height: 100vh;
+            position: relative;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #000;
+        }
+
+        .nav-btn {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: rgba(255,255,255,0.4);
+            border: 1px solid transparent;
+        }
+
+        .sidebar:hover .nav-btn {
+            justify-content: flex-start;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+
+        .nav-btn.active {
+            background: rgba(255,176,124,0.1);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Overlay Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .glitch-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+        }
+
+        .accent { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+<!-- Loader Overlay -->
+<div id="loader">
+    <div class="mb-6 relative">
+        <div class="w-16 h-16 border-2 border-accent border-t-transparent rounded-full animate-spin"></div>
+    </div>
+    <p class="glitch-text animate-pulse">SIMPLE OS INITIALIZING...</p>
+</div>
+
+<!-- Navigation Sidebar -->
+<div class="sidebar">
+    <div class="mb-12 sidebar-header">
+        <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center text-black font-black italic">S</div>
+    </div>
+
+    <nav class="w-full">
+        <div class="nav-btn active" onclick="loadContent('presentation')">
+            <i class="fa-solid fa-layer-group text-xl"></i>
+            <span class="nav-text">Презентация</span>
+        </div>
+        <div class="nav-btn" onclick="loadContent('logic')">
+            <i class="fa-solid fa-microchip text-xl"></i>
+            <span class="nav-text">ИТ-Стэк</span>
+        </div>
+        <div class="nav-btn" onclick="loadContent('brand')">
+            <i class="fa-solid fa-crown text-xl"></i>
+            <span class="nav-text">Бренд JUMA</span>
+        </div>
+    </nav>
+
+    <div class="mt-auto w-full">
+        <div class="nav-btn" onclick="window.open('https://wa.me/79687203102')">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            <span class="nav-text">Связаться</span>
+        </div>
+    </div>
+</div>
+
+<div class="main-content">
+    <iframe id="contentFrame" src=""></iframe>
+</div>
+
+<script>
+    // Весь контент хранится в строках для монолитного файла
+    const htmlAssets = {
+        presentation: `simple_presentation.html`,
+        logic: `stack_visualizer.html`,
+        brand: `juma_logo.html`
+    };
+
+    function loadContent(key) {
+        // UI updates
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.innerText.toLowerCase().includes(key === 'presentation' ? 'презентация' : key === 'logic' ? 'ит-стэк' : 'бренд'));
+        if (event) event.currentTarget.classList.add('active');
+
+        const frame = document.getElementById('contentFrame');
+        
+        // В этой версии мы просто ссылаемся на локальные файлы для удобства разработки,
+        // Но на GitHub Pages они будут лежать рядом.
+        frame.src = htmlAssets[key];
+        
+        // Показываем лоадер на время смены
+        const loader = document.getElementById('loader');
+        loader.style.opacity = '1';
+        loader.style.display = 'flex';
+        
+        setTimeout(() => {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        }, 800);
+    }
+
+    window.onload = () => {
+        loadContent('presentation');
+    };
+</script>
+
+</body>
+</html>
