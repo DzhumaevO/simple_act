@@ -206,22 +206,35 @@
     </div>
 
     <script>
-        // Скрипт предотвращения бесконечной загрузки
-        window.addEventListener('load', function() {
+        // Функция для скрытия лоадера в родительском окне (index.html)
+        function hideParentLoader() {
             document.body.classList.add('loaded');
             
-            if (window.parent !== window) {
-                try {
-                    const parentLoader = window.parent.document.getElementById('loader');
-                    if (parentLoader) {
-                        parentLoader.style.opacity = '0';
-                        setTimeout(() => parentLoader.style.display = 'none', 500);
+            // 1. Попытка через прямое обращение (если один домен)
+            try {
+                if (window.parent && window.parent.document) {
+                    const loader = window.parent.document.getElementById('loader') || 
+                                 window.parent.document.querySelector('[class*="loader"]');
+                    if (loader) {
+                        loader.style.opacity = '0';
+                        setTimeout(() => loader.style.display = 'none', 500);
                     }
-                } catch (e) {
-                    console.warn("Parent loader access issues - likely cross-origin. Use standard layout.");
                 }
+            } catch (e) {
+                console.log("Cross-origin or element access restricted.");
             }
-        });
+
+            // 2. Отправка сообщения родителю (самый надежный метод для GitHub Pages)
+            if (window.parent) {
+                window.parent.postMessage("hideLoader", "*");
+            }
+        }
+
+        // Запуск при полной загрузке контента
+        window.addEventListener('load', hideParentLoader);
+
+        // Резервный таймер (если событие load не сработает вовремя)
+        setTimeout(hideParentLoader, 1500);
     </script>
 
 </body>
